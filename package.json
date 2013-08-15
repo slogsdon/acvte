@@ -1,0 +1,26 @@
+{
+  "name": "goblog",
+  "version": "0.0.1",
+  "description": "a Revel-based blog.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://slogsdon@github.com/slogsdon/goblog.git"
+  },
+  "author": "Shane Logsdon",
+  "license": "MIT",
+  "gitHead": "5c780bc450a6babd7d868fa49d85dffe4f873133",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.2"
+  }
+}
