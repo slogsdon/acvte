@@ -20,10 +20,10 @@ build:
     - script:
         name: revel build
         code: |
-          revel build github.com/slogsdon/goblog
+          revel build github.com/slogsdon/acvte
 
     # Test the project
     - script:
         name: revel test
         code: |
-          revel test github.com/slogsdon/goblog
+          revel test github.com/slogsdon/acvte
