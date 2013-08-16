@@ -1,0 +1,27 @@
+{{ set . "title" "Shane Logsdon" }}
+{{ template "header.html" . }}
+
+{{ range .posts }}
+    <article id="post-{{ .Id }}" class="collapsed">
+        {{ if .External }}
+            <h1 class="external">
+                {{ if false }} <!-- @single_post -->
+                    <a href="{{ .Url }}">{{ .Title }}</a>
+                {{ else }}
+                    <a href="{{ .Url }}">{{ .Title }}</a>
+                {{ end }}
+            </h1>
+        {{ else }}
+            <h1>
+                {{ if false }} <!-- @single_post -->
+                    <a href="{{ .Url }}">{{ .Title }}</a>
+                {{ else }}
+                    <a href="{{ .Slug }}">{{ .Title }}</a>
+                {{ end }}
+            </h1>
+        {{ end }}
+        <time>{{ .Date }}</time>
+    </article>
+{{ end }}
+
+{{ template "footer.html" . }}

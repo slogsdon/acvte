@@ -1,17 +1,41 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en-US">
   <head>
-    <title>{{.title}}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.css">
+    <title>{{ if eq .title nil }}Shane Logsdon{{ else }}{{ .title }} - Shane Logsdon{{ end }}</title>
+    <meta content="Shane Logsdon" name="author">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/public/css/application.css">
     <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png">
-    <script src="/public/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
-    {{range .moreStyles}}
+    
+    {{ range .moreStyles }}
       <link rel="stylesheet" type="text/css" href="/public/{{.}}">
-    {{end}}
-    {{range .moreScripts}}
-      <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
-    {{end}}
+    {{ end }}
   </head>
   <body>
+    <div id="body">
+      <header class="clearfix">
+        <a href="/" class="icon-home" id="home-link">Home</a>
+        <div id="header-content">
+          <h1><a href="/">Shane Logsdon</a></h1>
+          <p>Developer. Tech tinkerer. Perpetual learner.</p>
+          <ul id="connect" class="clearfix">
+            <li>
+              <a href="http://twitter.com/shanelogsdon" class="icon-twitter" id="connect-twitter">@shanelogsdon</a>
+            </li>
+            <li>
+              <a href="https://github.com/slogsdon" class="icon-github" id="connect-github">github</a>
+            </li>
+            <li class="right">
+              <a href="mailto:shane@shanelogsdon.com" class="icon-envelope" id="connect-email">email</a>
+            </li>
+            <li class="right">
+              <a href="/posts.rss" class="open-external icon-rss" id="connect-rss">rss</a>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <div id="content">
+        <div class="inner">

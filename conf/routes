@@ -4,7 +4,7 @@
 
 module:testrunner
 
-GET     /                                       App.Index
+GET     /                                       Posts.Index
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
@@ -13,4 +13,4 @@ GET     /favicon.ico                            404
 GET     /public/*filepath                       Static.Serve("public")
 
 # Catch all
-*       /:controller/:action                    :controller.:action
+*       /:slug                                  Posts.Show

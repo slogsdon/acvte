@@ -7,5 +7,10 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "1.10.2",
+    "bootstrap": "3.0.0-rc.2",
+    "requirejs": "2.1.8"
+  }
 }

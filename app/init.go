@@ -1,6 +1,9 @@
 package app
 
-import "github.com/robfig/revel"
+import (
+	"github.com/robfig/revel"
+    "github.com/russross/blackfriday"
+)
 
 func init() {
 	// Filters is the default set of global filters.
@@ -15,5 +18,9 @@ func init() {
 		revel.I18nFilter,              // Resolve the requested language
 		revel.InterceptorFilter,       // Run interceptors around the action.
 		revel.ActionInvoker,           // Invoke the action.
+	}
+	revel.TemplateFuncs["markdown"] = func (str string) string {
+		output := blackfriday.MarkdownCommon([]byte(str))
+		return string(output)
 	}
 }
