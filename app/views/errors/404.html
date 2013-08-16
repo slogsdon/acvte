@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Not found</title>
-	</head>
-	<body>
+{{ set . "title" "Not Found" }}
 {{if eq .RunMode "dev"}}
-{{template "errors/404-dev.html" .}}
+	{{template "errors/404-dev.html" .}}
 {{else}}
 	{{with .Error}}
 	<h1>
@@ -16,5 +11,3 @@
 	</p>
 	{{end}}
 {{end}}
-	</body>
-</html>

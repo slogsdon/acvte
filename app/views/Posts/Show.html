@@ -1,4 +1,4 @@
-{{ set . "title" .post.Title }}
+{{ if .post }}{{ set . "title" .post.Title }}{{ end }}
 {{ template "header.html" . }}
 
 {{ with .post }}
@@ -9,11 +9,11 @@
             {{ raw (markdown .Content) }}
         </div>
     </article>
+
+    {{ template "Posts/_signature.html" . }}
+    {{ template "Posts/_pager.html" . }}
+    {{ template "Posts/_disqus.html" . }}
 {{ else }}
     {{ template "errors/404.html" . }}
 {{ end }}
-
-{{ template "signature.html" . }}
-{{ template "Posts/_pager.html" .post }}
-{{ template "disqus.html" .post }}
 {{ template "footer.html" . }}

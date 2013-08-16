@@ -2,7 +2,6 @@ package app
 
 import (
 	"github.com/robfig/revel"
-    "github.com/russross/blackfriday"
 )
 
 func init() {
@@ -16,11 +15,17 @@ func init() {
 		revel.FlashFilter,             // Restore and write the flash cookie.
 		revel.ValidationFilter,        // Restore kept validation errors and save new ones from cookie.
 		revel.I18nFilter,              // Resolve the requested language
+		HeaderFilter,				   // Security-based headers
 		revel.InterceptorFilter,       // Run interceptors around the action.
 		revel.ActionInvoker,           // Invoke the action.
 	}
-	revel.TemplateFuncs["markdown"] = func (str string) string {
-		output := blackfriday.MarkdownCommon([]byte(str))
-		return string(output)
-	}
+}
+
+var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
+	// Add some common security headers
+	c.Response.Out.Header().Add("X-Frame-Options", "SAMEORIGIN")
+	c.Response.Out.Header().Add("X-XSS-Protection", "1; mode=block")
+	c.Response.Out.Header().Add("X-Content-Type-Options", "nosniff")
+
+	fc[0](c, fc[1:]) // Execute the next filter stage.
 }
