@@ -14,7 +14,7 @@ build:
         code: |
           cd $WERCKER_SOURCE_DIR
           go version
-          go get github.com/robfig/revel
+          go get github.com/robfig/revel/revel
 
     # Build the project
     - script:
