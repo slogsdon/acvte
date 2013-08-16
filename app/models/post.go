@@ -1,6 +1,8 @@
 package models
 
 import (
+    "github.com/eaigner/jet"
+    _ "github.com/go-sql-driver/mysql"
 	"time"
 )
  
@@ -36,4 +38,26 @@ func (p *Post) PublishedAtTime() (time.Time, error) {
 func (p *Post) Date() (string) {
 	ts, _ := p.PublishedAtTime()
 	return ts.Format("January 2, 2006")
+}
+
+func (p *Post) NextPost() (*Post) {
+	db, err := jet.Open("mysql", "root:$emeleted46@/blog")
+
+    if (err != nil) {
+        panic(err)
+    }
+    var post *Post
+    db.Query(`SELECT * FROM posts WHERE id = (SELECT min(id) FROM posts WHERE id > ?) LIMIT 1`, p.Id).Rows(&post)
+    return post
+}
+
+func (p *Post) PrevPost() (*Post) {
+	db, err := jet.Open("mysql", "root:$emeleted46@/blog")
+
+    if (err != nil) {
+        panic(err)
+    }
+    var post *Post
+    db.Query(`SELECT * FROM posts WHERE id = (SELECT max(id) FROM posts WHERE id < ?) LIMIT 1`, p.Id).Rows(&post)
+    return post
 }

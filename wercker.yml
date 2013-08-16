@@ -1,1 +1,29 @@
 box: wercker/golang
+# Add services here
+# Build definition
+build:
+  # The steps that will be executed on build
+  steps:
+    # Sets the go workspace and places you package
+    # at the right place in the workspace tree
+    - setup-go-workspace
+
+    # Gets the dependencies
+    - script:
+        name: go get
+        code: |
+          cd $WERCKER_SOURCE_DIR
+          go version
+          go get github.com/robfig/revel
+
+    # Build the project
+    - script:
+        name: revel build
+        code: |
+          revel build github.com/slogsdon/goblog
+
+    # Test the project
+    - script:
+        name: revel test
+        code: |
+          revel test github.com/slogsdon/goblog

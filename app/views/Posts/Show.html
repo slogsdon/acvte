@@ -13,4 +13,7 @@
     {{ template "errors/404.html" . }}
 {{ end }}
 
+{{ template "signature.html" . }}
+{{ template "Posts/_pager.html" .post }}
+{{ template "disqus.html" .post }}
 {{ template "footer.html" . }}

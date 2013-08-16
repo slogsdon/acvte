@@ -1,0 +1,8 @@
+<nav class="history clearfix">
+    {{ if .NextPost }}
+        <a href="/{{ .NextPost.Slug }}" class="next">{{ .NextPost.Title }}</a>
+    {{ end }}
+    {{ if .PrevPost }}
+        <a href="/{{ .PrevPost.Slug }}" class="prev">{{ .PrevPost.Title }}</a>
+    {{ end }}
+</nav>
