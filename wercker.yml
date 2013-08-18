@@ -20,7 +20,7 @@ build:
     - script:
         name: revel build
         code: |
-          revel build github.com/slogsdon/acvte
+          revel build github.com/slogsdon/acvte acvte
 
     # Test the project
     - script:

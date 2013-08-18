@@ -1,7 +1,7 @@
 {
-  "name": "goblog",
+  "name": "acvte",
   "version": "0.0.1",
-  "description": "a Revel-based blog.",
+  "description": "a blog written in go, based off of obtvse2 / svbtle",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://slogsdon@github.com/slogsdon/goblog.git"
+    "url": "https://slogsdon@github.com/slogsdon/acvte.git"
   },
   "author": "Shane Logsdon",
   "license": "MIT",

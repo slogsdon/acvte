@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Edit Post - Shane Logsdon</title>
+    <meta content="authenticity_token" name="csrf-param" />
+    <meta content="X36nu4GADWy1YsUlK5jnQtO5R2LxnsQumEr+HKIdNZc=" name="csrf-token" />
+    <link href="/public/css/today.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/public/lib/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="/public/js/admin.js" type="text/javascript"></script>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet" type="text/css">
+</head>
+{{ with .post }}
+<body class="admin edit">
+    <a id="edit-button" href="/admin" data-target="#modal-login" class="icon-reorder" data-no-turbolink="true"></a>
+    <div id="admin">
+        <form accept-charset="UTF-8" action="/8/edit" class="edit_post" id="edit_post_8" method="post">
+            <div style="margin:0;padding:0;display:inline">
+                <input name="utf8" type="hidden" value="&#x2713;" />
+                <input name="_method" type="hidden" value="put" />
+                <input name="authenticity_token" type="hidden" value="X36nu4GADWy1YsUlK5jnQtO5R2LxnsQumEr+HKIdNZc=" />
+            </div>
+            <div id="post-editor" class="split-section">
+                <div id="text-title" class="expandingArea">
+                    <pre><span></span><br></pre>
+                    <textarea cols="40" id="post_title" name="post[title]" placeholder="Title here..." rows="1">{{ .Title }}</textarea>
+                </div>
+                <fieldset id="content-fieldset" class="markdown">
+                    <div id="text-content" class="expandingArea">
+                        <pre><span></span><br></pre>
+                        <textarea class="faded" cols="40" id="post_content" name="post[content]" placeholder="Write post here" rows="20">{{ .Content }}</textarea>
+                    </div>
+                </fieldset>
+            </div>
+            <div id="post-preview" class="split-section">
+                <div class="inner"></div>
+            </div>
+            <div id="bar">
+                <a href="/admin" class="icon-arrow-left" id="back-button">Back</a>
+                <a href="#preview" class="icon-eye-open" id="preview-button">Preview</a>
+                <div class="middle">
+                    <div id="menu-date" class="menu">
+                        <a href="#" class="icon-calendar" id="date-button">Date</a>
+                        <ul id="date" class="sub-menu">
+                            <li>
+                                <label for="post_published_at">Published Date</label>
+                                <input id="post_published_at" name="post[published_at]" size="30" type="text" value="{{ .PublishedAt }}" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="menu-link" class="menu">
+                        <a href="#link" class="icon-link">Link</a>
+                        <ul id="link" class="sub-menu">
+                            <li>
+                                <label for="post_slug">Permalink</label>
+                                <input id="post_slug" name="post[slug]" placeholder="Leave blank to automatically generate" size="30" type="text" value="{{ .Slug }}" />
+                            </li>
+                            <li>
+                                <label for="post_url">External URL</label>
+                                <input id="post_url" name="post[url]" placeholder="Optional" size="30" type="text" value="" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="menu">
+                        <a href="#stats" class="icon-bar-chart" id="stats-button">Stats</a>
+                        <ul id="stats" class="sub-menu">
+                            <li>
+                                <label>Wordcount</label><span id="wordcount"></span>
+                            </li>
+                            <li>
+                                <label>Views</label><span id="views"></span>
+                            </li>
+                            <li>
+                                <label>Reads</label><span id="reads"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="menu">
+                        <ul id="history" class="sub-menu">
+                            <li>
+                                <label for="post_url">History</label>
+                            </li>
+                            <li>
+                                <a href="#">Version 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Version 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Version 1</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="end">
+                    <a href="#" class="icon-edit" id="publish-button">Draft</a>
+                    <a href="/im-already-tired-of-rails-already" class="icon-trash" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
+                </div>
+            </div>
+            <div class="hide">
+                <input name="post[draft]" type="hidden" value="{{ .Draft }}" />
+                <input id="post_draft" name="post[draft]" type="checkbox" value="{{ .Draft }}" />
+            </div>
+        </form>
+        <button id="save-button" class="animated"></button>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal"></a>
+            <h3 id="modal-title"></h3>
+        </div>
+        <div class="modal-body">
+            <p id="modal-content"></p>
+        </div>
+        <div class="modal-footer">
+            <a id="btn-primary" class="btn" href="#"></a>
+            <a id="btn-seconday" class="btn btn-primary" href="#"></a>
+        </div>
+    </div>
+    <div id="null"></div>
+    <div id="line-height">Lorem</div>
+</body>
+{{ end }}
+</html>
