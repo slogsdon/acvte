@@ -2,7 +2,8 @@
 
 A markdown blog based off of @natew's 
 [obtvse2](https://github.com/natew/obtvse2), which was originally 
-inspired by [svbtle](https://svbtle.com). This is basically a direct 
+inspired by [svbtle](https://svbtle.com), using Today theme contributed to 
+obtvse2 by [@shilov](https://github.com/shilov). This is basically a direct 
 port of obtvse2 using the [revel framework](http://robfig.github.io/revel/) 
 for go, and I don't mean for it to be any more than that. This project was 
 just an exercise in getting comfortable with go and revel.
@@ -39,31 +40,13 @@ the others if they apply.
 ## TODO
 
 - Finish the admin
+- Create a new default design (?)
 - Look into allowing environment variables for database configuration
 - Generate migrations for database schema, or at the very least, add a schema dump to git
 
 ## License
 
-The MIT License (MIT)
-
-Copyright (c) 2013 Shane Logsdon
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+See the [LICENSE](https://github.com/slogsdon/acvte/blob/master/LICENSE) file.
 
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/77743a512302446b1bebcee204350425 "githalytics.com")](http://githalytics.com/slogsdon/acvte)
