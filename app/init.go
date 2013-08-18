@@ -2,6 +2,7 @@ package app
 
 import (
 	"github.com/robfig/revel"
+    "github.com/russross/blackfriday"
 )
 
 func init() {
@@ -19,9 +20,15 @@ func init() {
 		revel.InterceptorFilter,       // Run interceptors around the action.
 		revel.ActionInvoker,           // Invoke the action.
 	}
+
+	// template functions
+    revel.TemplateFuncs["markdown"] = func (str string) string {
+        output := blackfriday.MarkdownCommon([]byte(str))
+        return string(output)
+    }
 }
 
-var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
+var HeaderFilter = func (c *revel.Controller, fc []revel.Filter) {
 	// Add some common security headers
 	c.Response.Out.Header().Add("X-Frame-Options", "SAMEORIGIN")
 	c.Response.Out.Header().Add("X-XSS-Protection", "1; mode=block")
