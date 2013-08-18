@@ -1,0 +1,9 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# module:testrunner
+
+GET   /session          Session.Index
+GET   /session/create   Session.Create
+GET   /session/destroy  Session.Destroy

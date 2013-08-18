@@ -12,8 +12,18 @@ type Session struct {
 }
 
 func (c Session) init() {
+	panic("in session")
 }
 
 func (c Session) Index() revel.Result {
+	return c.Render()
+}
+
+func (c Session) Create() revel.Result {
+	panic("in create")
+	return c.Render()
+}
+
+func (c Session) Destroy() revel.Result {
 	return c.Render()
 }

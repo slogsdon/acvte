@@ -4,14 +4,12 @@ import (
 	"github.com/robfig/revel"
 	"github.com/russross/blackfriday"
 	"github.com/slogsdon/acvte/app/controllers"
-	"github.com/slogsdon/acvte/app/models"
-	//auth "github.com/slogsdon/modules/auth/app"
-	"reflect"
+	auth "github.com/slogsdon/acvte/modules/auth/app"
 )
 
 var aclMap = []auth.AuthenticatedResource{
 	{Role: "user", Resource: controllers.Admin{}},
-	{Role: "user", Resource: controllers.Admin.Edit},
+	// {Role: "user", Resource: controllers.Admin.Edit},
 }
 
 func init() {
@@ -31,8 +29,8 @@ func init() {
 	}
 
 	// revel.FilterController(controllers.Admin{}).
-	// 	Add(AuthenticationFilter)
-	auth.AclApply(aclMap)
+	// Add(AuthenticationFilter)
+	auth.Apply(aclMap)
 
 	// template functions
 	revel.TemplateFuncs["markdown"] = func(str string) string {

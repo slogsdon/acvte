@@ -2,7 +2,8 @@ package auth
 
 import (
 	"github.com/robfig/revel"
-	//_ "github.com/slogsdon/acvte/modules/auth/routes"
+	//"github.com/slogsdon/acvte/app/routes"
+	"reflect"
 )
 
 type AuthenticatedResource struct {
@@ -17,10 +18,13 @@ func init() {
 }
 
 var SessionAuthenticationFilter = func(c *revel.Controller, fc []revel.Filter) {
-	c.Redirect()
+	// if false {
+	// 	c.Flash.Error("Form invalid. Try again.")
+	// 	c.Redirect(routes.Session.Create())
+	// }
 }
 
-func AclApply(m []AuthenticatedResource) {
+func Apply(m []AuthenticatedResource) {
 	// revel.FilterController(controllers.Admin{}).
 	//  Add(AuthenticationFilter)
 	for _, a := range m {
