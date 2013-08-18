@@ -1,4 +1,4 @@
-# acvte
+# acvte [![wercker status](https://app.wercker.com/status/190ae2749b05de7d4b99f5a2a205fd39 "wercker status")](https://app.wercker.com/project/bykey/190ae2749b05de7d4b99f5a2a205fd39)
 
 A markdown blog based off of @natew's 
 [obtvse2](https://github.com/natew/obtvse2), which was originally 
