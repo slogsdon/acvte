@@ -28,8 +28,6 @@ func init() {
 		revel.ActionInvoker,           // Invoke the action.
 	}
 
-	// revel.FilterController(controllers.Admin{}).
-	// Add(AuthenticationFilter)
 	auth.Apply(aclMap)
 
 	// template functions

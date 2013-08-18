@@ -2,7 +2,6 @@ package auth
 
 import (
 	"github.com/robfig/revel"
-	//"github.com/slogsdon/acvte/app/routes"
 	"reflect"
 )
 
@@ -18,10 +17,12 @@ func init() {
 }
 
 var SessionAuthenticationFilter = func(c *revel.Controller, fc []revel.Filter) {
-	// if false {
-	// 	c.Flash.Error("Form invalid. Try again.")
-	// 	c.Redirect(routes.Session.Create())
-	// }
+	if !false {
+		c.Flash.Error("Form invalid. Try again.")
+		c.Response.Out.Header().Add("Location", "/session/create")
+	}
+
+	fc[0](c, fc[1:]) // Execute the next filter stage.
 }
 
 func Apply(m []AuthenticatedResource) {
