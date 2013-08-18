@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Shane Logsdon</title>
+    <meta content="authenticity_token" name="csrf-param" />
+    <meta content="X36nu4GADWy1YsUlK5jnQtO5R2LxnsQumEr+HKIdNZc=" name="csrf-token" />
+    <link href="/public/css/today.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/public/js/admin.js" type="text/javascript"></script>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet" type="text/css">
+</head>
+<body class="admin admin">
+    <a id="edit-button" href="/admin" data-target="#modal-login" class="icon-reorder" data-no-turbolink="true"></a>
+    <div id="admin">
+        <form accept-charset="UTF-8" action="/" class="new_post" id="new_post" method="post">
+            <div style="margin:0;padding:0;display:inline">
+                <input name="utf8" type="hidden" value="&#x2713;"/>
+                <input name="authenticity_token" type="hidden" value="vYo0oZnlAsOl37satnxjSWNdDx9u9RQFiAOy7y8bUOY="/>
+            </div>
+            <div id="post-editor" class="split-section">
+                <div id="text-title" class="expandingArea">
+                <pre><span></span><br></pre>
+                <textarea cols="40" id="post_title" name="post[title]" placeholder="" rows="1"></textarea>
+                </div>
+                <fieldset id="content-fieldset" class="markdown">
+                    <div id="text-content" class="expandingArea">
+                        <pre><span></span><br></pre>
+                        <textarea class="faded" cols="40" id="post_content" name="post[content]" placeholder="Write post here" rows="20"></textarea>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+        <div id="posts">
+            <div id="drafts" class="col active">
+                <h2>Drafts</h2>
+                <ul>
+                    {{ range .drafts }}
+                    <li id="post-{{ .Id }}" data-id="{{ .Id }}">
+                        <a href="/{{ .Id }}/edit">{{ .Title }}
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+            <div id="published" class="col">
+                <h2>Live</h2>
+                <ul>
+                    {{ range .published }}
+                    <li id="post-{{ .Id }}" data-id="{{ .Id }}">
+                        <a href="/{{ .Id }}/edit">{{ .Title }}
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+            <div class="hide">
+                <a href="/new" id="new-post"></a>
+            </div>
+        </div>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal"></a>
+            <h3 id="modal-title"></h3>
+        </div>
+        <div class="modal-body">
+            <p id="modal-content"></p>
+        </div>
+        <div class="modal-footer">
+            <a id="btn-primary" class="btn" href="#"></a>
+            <a id="btn-seconday" class="btn btn-primary" href="#"></a>
+        </div>
+    </div>
+    <div id="null"></div>
+    <div id="line-height">
+        Lorem
+    </div>
+</body>
+</html>

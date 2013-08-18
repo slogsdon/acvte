@@ -1,8 +1,7 @@
 package models
 
 import (
-    "github.com/eaigner/jet"
-    _ "github.com/go-sql-driver/mysql"
+    "github.com/robfig/revel"
 	"time"
 )
  
@@ -11,56 +10,29 @@ const (
 	DbtimeLayout = "2006-01-02 15:04:05"
 )
 
-var (
-	db  jet.Db
-	err error
-)
-
+// Table name: posts
 type Post struct {
-	Id           int
-	Title        string
-	Slug         string
-	Content      string
-	Draft        bool
-	CreatedAt    string
-	UpdatedAt    string
-	Aside        bool
-	Url          string
-	Parent       int
-	Timespent    int
-	PublishedAt  string
-	External     bool
+	Id           int32          `json:"id" qbs:"pk,notnull"`
+	Title        string         `json:"title"`
+	Slug         string         `json:"slug"`
+	Content      string         `json:"content"`
+	Draft        bool           `json:"draft" qbs:"default:'true'"`
+	CreatedAt    time.Time      `json:"created_at" qbs:"notnull,created"`
+	UpdatedAt    time.Time      `json:"updated_at" qbs:"notnull,updated"`
+	Aside        bool           `json:"aside"`
+	Url          string         `json:"url"`
+	Parent       int32          `json:"parent"`
+	Timespent    int32          `json:"timespent"`
+	PublishedAt  time.Time      `json:"published_at"`
+	External     bool			`qbs:"-"`
+	NextPost     *Post 			`qbs:"-"`
+	PrevPost     *Post 			`qbs:"-"`
 }
 
-func init() {
-    db, err = jet.Open("mysql", "root:$emeleted46@/blog")
-
-    if (err != nil) {
-        panic(err)
-    }
-}
-
-func (p *Post) PublishedAtTime() (time.Time, error) {
-	ts, err := time.Parse(DbtimeLayout, p.PublishedAt)
-	if err != nil {
-		return time.Time{}, err
-	}
-	return ts, err
+func (p *Post) Validate(v *revel.Validation) {
+    v.Required(p.Title)
 }
 
 func (p *Post) Date() (string) {
-	ts, _ := p.PublishedAtTime()
-	return ts.Format("January 2, 2006")
-}
-
-func (p *Post) NextPost() (*Post) {
-    var post *Post
-    db.Query(`SELECT * FROM posts WHERE id = (SELECT min(id) FROM posts WHERE id > ?) LIMIT 1`, p.Id).Rows(&post)
-    return post
-}
-
-func (p *Post) PrevPost() (*Post) {
-    var post *Post
-    db.Query(`SELECT * FROM posts WHERE id = (SELECT max(id) FROM posts WHERE id < ?) LIMIT 1`, p.Id).Rows(&post)
-    return post
+	return p.PublishedAt.Format("January 2, 2006")
 }

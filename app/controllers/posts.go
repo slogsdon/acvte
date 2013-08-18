@@ -1,43 +1,56 @@
 package controllers
 
 import (
-    "github.com/eaigner/jet"
-    _ "github.com/go-sql-driver/mysql"
     "github.com/robfig/revel"
-    "github.com/russross/blackfriday"
-    "github.com/slogsdon/goblog/app/models"
+    "github.com/slogsdon/acvte/app/models"
+    "github.com/slogsdon/acvte/app/modules/db"
 )
 
 type Posts struct {
     *revel.Controller
 }
 
-var (
-    db  jet.Db
-    err error
-)
-
-func init() {
-    revel.TemplateFuncs["markdown"] = func (str string) string {
-        output := blackfriday.MarkdownCommon([]byte(str))
-        return string(output)
-    }
-
-    db, err = jet.Open("mysql", "root:$emeleted46@/blog")
-
-    if (err != nil) {
-        panic(err)
-    }
+func (c Posts) init() {
 }
 
 func (c Posts) Index() revel.Result {
     var posts []*models.Post
-    db.Query(`SELECT * FROM posts ORDER BY published_at DESC`).Rows(&posts)
+    db.Db.OrderByDesc("published_at").FindAll(&posts)
     return c.Render(posts)
 }
 
 func (c Posts) Show(slug string) revel.Result {
-    var post *models.Post
-    db.Query(`SELECT * FROM posts WHERE slug = ? LIMIT 1`, slug).Rows(&post)
+    post := new(models.Post)
+    db.Db.WhereEqual("slug", slug).Limit(1).Find(post)
+
+    post.NextPost = c.NextPost(post)
+    post.PrevPost = c.PrevPost(post)
+
     return c.Render(post)
+}
+
+func (c Posts) NextPost(p *models.Post) (*models.Post) {
+    var id int32
+    err := db.Db.QueryRow("SELECT min(id) FROM post WHERE id > ? LIMIT 1", p.Id).Scan(&id)
+
+    if err != nil {
+        return nil
+    }
+
+    post := new(models.Post)
+    db.Db.WhereEqual("id", id).Find(post)
+    return post
+}
+
+func (c Posts) PrevPost(p *models.Post) (*models.Post) {
+    var id int32
+    err := db.Db.QueryRow("SELECT max(id) as id FROM post WHERE id < ? LIMIT 1", p.Id).Scan(&id)
+
+    if err != nil {
+        return nil
+    }
+
+    post := new(models.Post)
+    db.Db.WhereEqual("id", id).Find(post)
+    return post
 }
