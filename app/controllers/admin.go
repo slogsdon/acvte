@@ -4,7 +4,6 @@ import (
     "github.com/robfig/revel"
     "github.com/slogsdon/acvte/app/models"
     "github.com/slogsdon/acvte/app/modules/db"
-    "github.com/slogsdon/acvte/app/routes"
 )
 
 type Admin struct {
@@ -44,5 +43,5 @@ func (c Admin) Update(p *models.Post) revel.Result {
         c.FlashParams()
     }
 
-    return c.Redirect(routes.Admin.Edit(p.Id))
+    return c.RenderJson(p)
 }
