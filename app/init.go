@@ -2,8 +2,17 @@ package app
 
 import (
 	"github.com/robfig/revel"
-    "github.com/russross/blackfriday"
+	"github.com/russross/blackfriday"
+	"github.com/slogsdon/acvte/app/controllers"
+	"github.com/slogsdon/acvte/app/models"
+	//auth "github.com/slogsdon/modules/auth/app"
+	"reflect"
 )
+
+var aclMap = []auth.AuthenticatedResource{
+	{Role: "user", Resource: controllers.Admin{}},
+	{Role: "user", Resource: controllers.Admin.Edit},
+}
 
 func init() {
 	// Filters is the default set of global filters.
@@ -16,19 +25,23 @@ func init() {
 		revel.FlashFilter,             // Restore and write the flash cookie.
 		revel.ValidationFilter,        // Restore kept validation errors and save new ones from cookie.
 		revel.I18nFilter,              // Resolve the requested language
-		HeaderFilter,				   // Security-based headers
+		HeaderFilter,                  // Security-based headers
 		revel.InterceptorFilter,       // Run interceptors around the action.
 		revel.ActionInvoker,           // Invoke the action.
 	}
 
+	// revel.FilterController(controllers.Admin{}).
+	// 	Add(AuthenticationFilter)
+	auth.AclApply(aclMap)
+
 	// template functions
-    revel.TemplateFuncs["markdown"] = func (str string) string {
-        output := blackfriday.MarkdownCommon([]byte(str))
-        return string(output)
-    }
+	revel.TemplateFuncs["markdown"] = func(str string) string {
+		output := blackfriday.MarkdownCommon([]byte(str))
+		return string(output)
+	}
 }
 
-var HeaderFilter = func (c *revel.Controller, fc []revel.Filter) {
+var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
 	// Add some common security headers
 	c.Response.Out.Header().Add("X-Frame-Options", "SAMEORIGIN")
 	c.Response.Out.Header().Add("X-XSS-Protection", "1; mode=block")
