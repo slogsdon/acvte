@@ -414,40 +414,21 @@ ul.icons li [class^="icon-"],ul.icons li [class*=" icon-"]
   transform:rotate(359deg);
 }
 
-.icon-edit:before
-{
-  content:"\f044";
-}
+.icon-edit:before { content:"\f044"; }
+.icon-chevron-left:before { content:"\f053"; }
+.icon-chevron-right:before { content:"\f054"; }
+.icon-twitter:before { content:"\f099"; }
+.icon-facebook:before { content:"\f09a"; }
+.icon-github:before { content:"\f09b"; }
+.icon-rss:before { content:"\f09e"; }
+.icon-trash:before { content:"\f014"; }
+.icon-bar-chart:before { content:"\f080"; }
+.icon-calendar:before { content:"\f073"; }
+.icon-link:before { content:"\f0c1"; }
+.icon-linkedin:before { content:"\f0e1"; }
+.icon-eye-open:before { content:"\f06e"; }
+.icon-arrow-left:before { content:"\f060"; }
 
-.icon-chevron-left:before
-{
-  content:"\f053";
-}
-
-.icon-chevron-right:before
-{
-  content:"\f054";
-}
-
-.icon-twitter:before
-{
-  content:"\f099";
-}
-
-.icon-facebook:before
-{
-  content:"\f09a";
-}
-
-.icon-github:before
-{
-  content:"\f09b";
-}
-
-.icon-rss:before
-{
-  content:"\f09e";
-}
 .avgrund-active #body
 {
   -webkit-transform:scale(0.9);

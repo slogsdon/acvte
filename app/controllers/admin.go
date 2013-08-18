@@ -28,9 +28,9 @@ func (c Admin) New() revel.Result {
 }
 
 func (c Admin) Edit(id int32) revel.Result {
-    var post *models.Post
+    post := new(models.Post)
 
-    db.Db.WhereEqual("id", id).Find(&post)
+    db.Db.WhereEqual("id", id).Find(post)
     return c.Render(post)
 }
 
