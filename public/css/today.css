@@ -427,6 +427,7 @@ ul.icons li [class^="icon-"],ul.icons li [class*=" icon-"]
 .icon-link:before { content:"\f0c1"; }
 .icon-linkedin:before { content:"\f0e1"; }
 .icon-eye-open:before { content:"\f06e"; }
+.icon-eye-close:before { content:"\f070"; }
 .icon-arrow-left:before { content:"\f060"; }
 
 .avgrund-active #body
