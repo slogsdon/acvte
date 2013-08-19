@@ -10,17 +10,18 @@ build:
 
     # Gets the dependencies
     - script:
-        name: go get
+        name: go get revel
         code: |
           cd $WERCKER_SOURCE_DIR
           go version
+          go get ./...
           go get github.com/robfig/revel/revel
 
     # Build the project
     - script:
         name: revel build
         code: |
-          revel build github.com/slogsdon/acvte $WERCKER_SOURCE_DIR/build/acvte
+          revel build github.com/slogsdon/acvte $WERCKER_OUTPUT_DIR
 
     # Test the project
     - script:
