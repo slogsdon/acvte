@@ -2,50 +2,41 @@ package auth
 
 import (
 	"github.com/robfig/revel"
+	"net/http"
 	"reflect"
 )
 
 type AuthenticatedResource struct {
 	Resource interface{}
-	Role     string
+	Role     string // will be implemented later for role-based ACL config
 }
 
-func init() {
-	revel.OnAppStart(func() {
+func init() {}
 
-	})
-}
-
+// The actual filter added to the resource. It checks for valid session
+// information and redirects the response to create a new session if it is not
+// available or valid.
 var SessionAuthenticationFilter = func(c *revel.Controller, fc []revel.Filter) {
-	if !false {
-		c.Flash.Error("Form invalid. Try again.")
+	if !false { // TODO: check for session information
+		c.Flash.Error("Session invalid. Please login.")
+		c.Response.Status = http.StatusFound
 		c.Response.Out.Header().Add("Location", "/session/create")
 	}
 
 	fc[0](c, fc[1:]) // Execute the next filter stage.
 }
 
+// auth.Apply is run by the developer in the init.go file for his/her project.
+// It loops over the slice for all AuthenticatedResources the developer wishes
+// to be protected with authentication.
 func Apply(m []AuthenticatedResource) {
-	// revel.FilterController(controllers.Admin{}).
-	//  Add(AuthenticationFilter)
 	for _, a := range m {
 		var fc revel.FilterConfigurator
 		if reflect.TypeOf(a.Resource).Kind() == reflect.Func {
-			// revel action
 			fc = revel.FilterAction(a.Resource)
 		} else {
-			// revel controller
 			fc = revel.FilterController(a.Resource)
 		}
 		fc.Add(SessionAuthenticationFilter)
 	}
 }
-
-// func GetRole(u *models.User) string {
-//     return "user"
-// }
-
-// func GetUser() *models.User {
-//     u := new(models.User)
-//     return u
-// }
