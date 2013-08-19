@@ -2,6 +2,7 @@ package auth
 
 import (
 	"github.com/robfig/revel"
+	"reflect"
 	//_ "github.com/slogsdon/acvte/modules/auth/routes"
 )
 
@@ -17,7 +18,8 @@ func init() {
 }
 
 var SessionAuthenticationFilter = func(c *revel.Controller, fc []revel.Filter) {
-	c.Redirect()
+	// TODO: Fix redirect
+	//c.Redirect()
 }
 
 func AclApply(m []AuthenticatedResource) {
