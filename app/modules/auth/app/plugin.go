@@ -17,7 +17,8 @@ func init() {
 }
 
 var SessionAuthenticationFilter = func(c *revel.Controller, fc []revel.Filter) {
-	c.Redirect()
+	// TODO: Fix redirect
+	//c.Redirect()
 }
 
 func AclApply(m []AuthenticatedResource) {
