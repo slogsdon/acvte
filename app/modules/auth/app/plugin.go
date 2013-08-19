@@ -2,6 +2,7 @@ package auth
 
 import (
 	"github.com/robfig/revel"
+	"reflect"
 	//_ "github.com/pjvds/acvte/modules/auth/routes"
 )
 
