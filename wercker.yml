@@ -20,10 +20,10 @@ build:
     - script:
         name: revel build
         code: |
-          revel build github.com/slogsdon/acvte $WERCKER_SOURCE_DIR/build/acvte
+          revel build $WERCKER_SOURCE_DIR $WERCKER_SOURCE_DIR/build/acvte
 
     # Test the project
     - script:
         name: revel test
         code: |
-          revel test github.com/slogsdon/acvte
+          revel test $WERCKER_SOURCE_DIR
