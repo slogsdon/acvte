@@ -11,6 +11,8 @@ build:
         name: Export package path
         code: |
           export PACKAGE_PATH="$WERCKER_GIT_DOMAIN/$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSITORY"
+          echo '$PACKAGE_PATH set to:'
+          echo "$PACKAGE_PATH"
 
     # Gets the dependencies
     - script:
