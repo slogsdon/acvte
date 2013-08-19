@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/pjvds/acvte/app/controllers"
+	//"github.com/pjvds/acvte/app/controllers"
 	"github.com/robfig/revel"
 	"github.com/russross/blackfriday"
 	//"github.com/pjvds/acvte/app/models"
