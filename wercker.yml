@@ -27,7 +27,7 @@ build:
     - script:
         name: revel build
         code: |
-          revel build $PACKAGE_PATH $WERCKER_SOURCE_DIR/build/acvte
+          revel build $PACKAGE_PATH $WERCKER_OUTPUT_DIR
 
     # Test the project
     - script:
