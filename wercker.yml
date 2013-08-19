@@ -7,6 +7,10 @@ build:
     # Sets the go workspace and places you package
     # at the right place in the workspace tree
     - setup-go-workspace
+    - script:
+        name: Export package path
+        code: |
+          export PACKAGE_PATH="$WERCKER_GIT_DOMAIN/$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSITORY"
 
     # Gets the dependencies
     - script:
@@ -20,10 +24,10 @@ build:
     - script:
         name: revel build
         code: |
-          revel build $WERCKER_SOURCE_DIR $WERCKER_SOURCE_DIR/build/acvte
+          revel build $PACKAGE_PATH $WERCKER_SOURCE_DIR/build/acvte
 
     # Test the project
     - script:
         name: revel test
         code: |
-          revel test $WERCKER_SOURCE_DIR
+          revel test $PACKAGE_PATH
