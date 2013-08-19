@@ -3,7 +3,7 @@ package auth
 import (
 	"github.com/robfig/revel"
 	"reflect"
-	//_ "github.com/pjvds/acvte/modules/auth/routes"
+	//_ "github.com/slogsdon/acvte/modules/auth/routes"
 )
 
 type AuthenticatedResource struct {

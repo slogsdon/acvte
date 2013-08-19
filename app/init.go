@@ -1,10 +1,10 @@
 package app
 
 import (
-	//"github.com/pjvds/acvte/app/controllers"
+	//"github.com/slogsdon/acvte/app/controllers"
 	"github.com/robfig/revel"
 	"github.com/russross/blackfriday"
-	//"github.com/pjvds/acvte/app/models"
+	//"github.com/slogsdon/acvte/app/models"
 	//auth "github.com/slogsdon/modules/auth/app"
 	//"reflect"
 )
