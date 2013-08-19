@@ -2,8 +2,8 @@ package controllers
 
 import (
     "github.com/robfig/revel"
-    "github.com/slogsdon/acvte/app/models"
-    "github.com/slogsdon/acvte/app/modules/db"
+    "github.com/pjvds/acvte/app/models"
+    "github.com/pjvds/acvte/app/modules/db"
 )
 
 type Posts struct {
