@@ -2,10 +2,11 @@ package app
 
 import (
 	"github.com/robfig/revel"
-	auth "github.com/robfig/revel/modules/auth/app"
+	"github.com/robfig/revel/modules/auth"
 	"github.com/russross/blackfriday"
 	c "github.com/slogsdon/acvte/app/controllers"
 	m "github.com/slogsdon/acvte/app/models"
+	"github.com/slogsdon/acvte/modules/db"
 )
 
 var aclMap = []auth.AuthenticatedResource{
@@ -38,6 +39,11 @@ func init() {
 		auth.Apply(aclMap)
 		auth.Use(auth.AuthStructs{
 			User: m.User{},
+			VerifyWith: func(u string) *m.User {
+				user := new(m.User)
+				err := db.Db.WhereEqual("username", u).Find(user)
+				return user
+			},
 		})
 	})
 }
