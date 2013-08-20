@@ -1,8 +1,0 @@
-language: go
-go: 1.1
-install:
-  - export PATH=$PATH:$HOME/gopath/bin
-  - go get -v github.com/robfig/revel/revel
-script:
-  - revel build github.com/slogsdon/acvte build/acvte
-  - revel test  github.com/slogsdon/acvte

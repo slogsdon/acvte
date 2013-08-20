@@ -1,16 +1,15 @@
 package app
 
 import (
-	//"github.com/slogsdon/acvte/app/controllers"
 	"github.com/robfig/revel"
+	auth "github.com/robfig/revel/modules/auth/app"
 	"github.com/russross/blackfriday"
-	"github.com/slogsdon/acvte/app/controllers"
-	auth "github.com/slogsdon/acvte/modules/auth/app"
+	c "github.com/slogsdon/acvte/app/controllers"
+	m "github.com/slogsdon/acvte/app/models"
 )
 
 var aclMap = []auth.AuthenticatedResource{
-	{Role: "user", Resource: controllers.Admin{}},
-	// {Role: "user", Resource: controllers.Admin.Edit},
+	{Role: "user", Resource: c.Admin{}},
 }
 
 func init() {
@@ -29,13 +28,18 @@ func init() {
 		revel.ActionInvoker,           // Invoke the action.
 	}
 
-	auth.Apply(aclMap)
-
 	// template functions
 	revel.TemplateFuncs["markdown"] = func(str string) string {
 		output := blackfriday.MarkdownCommon([]byte(str))
 		return string(output)
 	}
+
+	revel.OnAppStart(func() {
+		auth.Apply(aclMap)
+		auth.Use(auth.AuthStructs{
+			User: m.User{},
+		})
+	})
 }
 
 var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
