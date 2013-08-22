@@ -3,6 +3,7 @@
 # ~~~~
 
 module:testrunner
+module:auth
 
 GET     /                                       Posts.Index
 

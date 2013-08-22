@@ -1,18 +1,9 @@
 package app
 
 import (
-	//"github.com/slogsdon/acvte/app/controllers"
 	"github.com/robfig/revel"
 	"github.com/russross/blackfriday"
-	//"github.com/slogsdon/acvte/app/models"
-	//auth "github.com/slogsdon/modules/auth/app"
-	//"reflect"
 )
-
-// var aclMap = []auth.AuthenticatedResource{
-// 	{Role: "user", Resource: controllers.Admin{}},
-// 	{Role: "user", Resource: controllers.Admin.Edit},
-// }
 
 func init() {
 	// Filters is the default set of global filters.
@@ -29,10 +20,6 @@ func init() {
 		revel.InterceptorFilter,       // Run interceptors around the action.
 		revel.ActionInvoker,           // Invoke the action.
 	}
-
-	// revel.FilterController(controllers.Admin{}).
-	// 	Add(AuthenticationFilter)
-	//auth.AclApply(aclMap)
 
 	// template functions
 	revel.TemplateFuncs["markdown"] = func(str string) string {
