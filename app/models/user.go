@@ -1,7 +1,6 @@
 package models
 
 import (
-	_ "github.com/robfig/revel"
 	"time"
 )
 
@@ -24,5 +23,4 @@ type User struct {
 	LastActivityAt              time.Time `json:"last_activity_at"`
 	FailedLoginsCount           int32     `json:"failed_logins_count" qbs:"default:'0'"`
 	LockExpiresAt               time.Time `json:"lock_expires_at"`
-	Role                        string
 }
