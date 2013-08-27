@@ -47,7 +47,7 @@ deploy:
             code: |
                 pwd
                 ls -la
-                rsync -av -e "ssh -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no" $WERCKER_OUTPUT_DIR root@apphost.io:/var/www/vhosts/shanelogsdon.com/subdomains/acvte
+                rsync -av -e "ssh -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no" . root@apphost.io:/var/www/vhosts/shanelogsdon.com/subdomains/acvte
         - script:
             name: start application
             code: ssh -i $PRIVATEKEY_PATH -l root -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no apphost.io start acvte
