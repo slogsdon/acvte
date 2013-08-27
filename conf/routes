@@ -5,18 +5,18 @@
 module:testrunner
 module:auth
 
-GET     /                                       Posts.Index
+GET      /                                       Posts.Index
 
-GET     /admin                                  Admin.Index
-GET     /new                                    Admin.New
-GET     /:id/edit                               Admin.Edit
-POST    /:id/edit                               Admin.Update
+GET      /admin                                  Admin.Index
+GET      /new                                    Admin.New
+GET      /:id/edit                               Admin.Edit
+POST,PUT /:id/edit                               Admin.Update
 
 # Ignore favicon requests
-GET     /favicon.ico                            404
+GET      /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
-GET     /public/*filepath                       Static.Serve("public")
+GET      /public/*filepath                       Static.Serve("public")
 
 # Catch all
-*       /:slug                                  Posts.Show
+*        /:slug                                  Posts.Show

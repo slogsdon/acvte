@@ -12,19 +12,42 @@ build:
     - script:
         name: go get revel
         code: |
-          cd $WERCKER_SOURCE_DIR
-          go version
-          go get ./...
-          go get github.com/robfig/revel/revel
+            cd $WERCKER_SOURCE_DIR
+            go version
+            go get ./...
+            go get github.com/robfig/revel/revel
 
     # Build the project
     - script:
         name: revel build
         code: |
-          revel build github.com/slogsdon/acvte $WERCKER_OUTPUT_DIR
+            revel build github.com/slogsdon/acvte $WERCKER_OUTPUT_DIR
 
     # Test the project
     - script:
         name: revel test
         code: |
-          revel test github.com/slogsdon/acvte
+            revel test github.com/slogsdon/acvte
+deploy:
+    steps:
+        - add-to-known_hosts:
+            hostname: apphost.io
+        - mktemp:
+            envvar: PRIVATEKEY_PATH
+        - create-file:
+            name: write key
+            filename: $PRIVATEKEY_PATH
+            content: $FOO_PRIVATE
+            overwrite: true
+        - script:
+            name: stop application
+            code: ssh -i $PRIVATEKEY_PATH -l root -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no apphost.io stop gocities
+        - script:
+            name: transfer application
+            code: |
+                pwd
+                ls -la
+                scp -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no digitalocean-test root@apphost.io:/var/www/vhosts/shanelogsdon.com/subdomains/acvte
+        - script:
+            name: start application
+            code: ssh -i $PRIVATEKEY_PATH -l root -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no apphost.io start gocities

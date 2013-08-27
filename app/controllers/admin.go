@@ -37,15 +37,15 @@ func (c Admin) Edit(id int32) revel.Result {
 	return c.Render(post)
 }
 
-func (c Admin) Update(p *models.Post) revel.Result {
+func (c Admin) Update(post *models.Post) revel.Result {
 	auth.CheckSession(c.Controller)
 
-	p.Validate(c.Validation)
+	post.Validate(c.Validation)
 	// Handle errors
 	if c.Validation.HasErrors() {
 		c.Validation.Keep()
 		c.FlashParams()
 	}
 
-	return c.RenderJson(p)
+	return c.RenderJson(post)
 }

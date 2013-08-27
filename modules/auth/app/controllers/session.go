@@ -14,7 +14,7 @@ type Session struct {
 func (c Session) init() {}
 
 func (c Session) Index() revel.Result {
-	return c.Redirect("/session/create")
+	return c.Redirect(Session.Create)
 }
 
 func (c Session) Create(username string, password string) revel.Result {
@@ -23,7 +23,7 @@ func (c Session) Create(username string, password string) revel.Result {
 		db.Db.WhereEqual("username", username).Limit(1).Find(user)
 
 		if err := auth.RegisterSession(c.Controller, user.CryptedPassword, password); err != nil {
-			return c.RenderJson(user)
+			return c.Redirect(Session.Create)
 		} else {
 			return c.Redirect("/admin")
 		}

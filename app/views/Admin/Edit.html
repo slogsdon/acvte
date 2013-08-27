@@ -13,8 +13,10 @@
 <body class="admin edit">
     <a id="edit-button" href="/admin" data-target="#modal-login" class="icon-reorder" data-no-turbolink="true"></a>
     <div id="admin">
-        <form accept-charset="UTF-8" action="/8/edit" class="edit_post" id="edit_post_8" method="post">
+        <form accept-charset="UTF-8" action="/{{ .Id }}/edit" class="edit_post" id="edit_post_{{ .Id }}" method="post">
             <div style="margin:0;padding:0;display:inline">
+                <input name="post.Id" type="hidden" value="{{ .Id }}" />
+                <input name="post.CreatedAt" type="hidden" value="{{ .CreatedAtDateTime }}" />
                 <input name="utf8" type="hidden" value="&#x2713;" />
                 <input name="_method" type="hidden" value="put" />
                 <input name="authenticity_token" type="hidden" value="X36nu4GADWy1YsUlK5jnQtO5R2LxnsQumEr+HKIdNZc=" />
@@ -22,12 +24,12 @@
             <div id="post-editor" class="split-section">
                 <div id="text-title" class="expandingArea">
                     <pre><span></span><br></pre>
-                    <textarea cols="40" id="post_title" name="post[title]" placeholder="Title here..." rows="1">{{ .Title }}</textarea>
+                    <textarea cols="40" id="post_title" name="post.Title" placeholder="Title here..." rows="1">{{ .Title }}</textarea>
                 </div>
                 <fieldset id="content-fieldset" class="markdown">
                     <div id="text-content" class="expandingArea">
                         <pre><span></span><br></pre>
-                        <textarea class="faded" cols="40" id="post_content" name="post[content]" placeholder="Write post here" rows="20">{{ .Content }}</textarea>
+                        <textarea class="faded" cols="40" id="post_content" name="post.Content" placeholder="Write post here" rows="20">{{ .Content }}</textarea>
                     </div>
                 </fieldset>
             </div>
@@ -43,7 +45,7 @@
                         <ul id="date" class="sub-menu">
                             <li>
                                 <label for="post_published_at">Published Date</label>
-                                <input id="post_published_at" name="post[published_at]" size="30" type="text" value="{{ .PublishedAt }}" />
+                                <input id="post_published_at" name="post.PublishedAt" size="30" type="text" value="{{ .PublishedAtDateTime }}" />
                             </li>
                         </ul>
                     </div>
@@ -52,11 +54,11 @@
                         <ul id="link" class="sub-menu">
                             <li>
                                 <label for="post_slug">Permalink</label>
-                                <input id="post_slug" name="post[slug]" placeholder="Leave blank to automatically generate" size="30" type="text" value="{{ .Slug }}" />
+                                <input id="post_slug" name="post.Slug" placeholder="Leave blank to automatically generate" size="30" type="text" value="{{ .Slug }}" />
                             </li>
                             <li>
                                 <label for="post_url">External URL</label>
-                                <input id="post_url" name="post[url]" placeholder="Optional" size="30" type="text" value="" />
+                                <input id="post_url" name="post.Url" placeholder="Optional" size="30" type="text" value="{{ .Url }}" />
                             </li>
                         </ul>
                     </div>
@@ -93,12 +95,12 @@
                 </div>
                 <div class="end">
                     <a href="#" class="icon-edit" id="publish-button">Draft</a>
-                    <a href="/im-already-tired-of-rails-already" class="icon-trash" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
+                    <a href="/{{ .Slug }}" class="icon-trash" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
                 </div>
             </div>
             <div class="hide">
-                <input name="post[draft]" type="hidden" value="{{ .Draft }}" />
-                <input id="post_draft" name="post[draft]" type="checkbox" value="{{ .Draft }}" />
+                <input name="post.Draft" type="hidden" value="{{ .Draft }}" />
+                <input id="post_draft" name="post.Draft" type="checkbox" value="{{ .Draft }}" />
             </div>
         </form>
         <button id="save-button" class="animated"></button>

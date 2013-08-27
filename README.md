@@ -39,10 +39,11 @@ the others if they apply.
 
 ## TODO
 
-- Finish the admin
+- Finish the admin. Mainly need update/save fixed
 - Create a new default design (?)
 - Look into allowing environment variables for database configuration
 - Generate migrations for database schema, or at the very least, add a schema dump to git
+- Allow for MongoDB support with mgo
 
 ## License
 
