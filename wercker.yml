@@ -37,7 +37,7 @@ deploy:
         - create-file:
             name: write key
             filename: $PRIVATEKEY_PATH
-            content: $FOO_PRIVATE
+            content: $ACVTE_DEPLOY_KEY_PRIVATE
             overwrite: true
         - script:
             name: stop application
