@@ -39,9 +39,9 @@ deploy:
             filename: $PRIVATEKEY_PATH
             content: $ACVTE_DEPLOY_KEY_PRIVATE
             overwrite: true
-        - script:
-            name: stop application
-            code: ssh -i $PRIVATEKEY_PATH -l root -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no apphost.io stop acvte
+        # - script:
+        #     name: stop application
+        #     code: ssh -i $PRIVATEKEY_PATH -l root -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no apphost.io stop acvte
         - script:
             name: transfer application
             code: |
