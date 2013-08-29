@@ -1,26 +1,21 @@
 {{ template "header.html" . }}
 
+<h1>Posts in {{ .category }}</h1>
+
 {{ range .posts }}
     <article id="post-{{ .Id }}" class="collapsed">
         {{ if .External }}
-            <h1 class="external">
-                {{ if false }} <!-- @single_post -->
-                    <a href="{{ .Url }}">{{ .Title }}</a>
-                {{ else }}
-                    <a href="{{ .Url }}">{{ .Title }}</a>
-                {{ end }}
-            </h1>
+            <h2 class="external">
+                <a href="{{ .Url }}">{{ .Title }}</a>
+            </h2>
         {{ else }}
-            <h1>
-                {{ if false }} <!-- @single_post -->
-                    <a href="{{ .Url }}">{{ .Title }}</a>
-                {{ else }}
-                    <a href="{{ .Slug }}">{{ .Title }}</a>
-                {{ end }}
-            </h1>
+            <h2>
+                <a href="{{ .Slug }}">{{ .Title }}</a>
+            </h2>
         {{ end }}
         <time>{{ .Date }}</time>
     </article>
+{{ else }}
 {{ end }}
 
 {{ template "footer.html" . }}

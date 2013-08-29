@@ -24,6 +24,7 @@ type Post struct {
 	Parent      int32     `json:"parent"`
 	Timespent   int32     `json:"timespent"`
 	PublishedAt time.Time `json:"published_at"`
+	Page 		bool	  `json:"page"`
 	External    bool      `qbs:"-"`
 	NextPost    *Post     `qbs:"-"`
 	PrevPost    *Post     `qbs:"-"`

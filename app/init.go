@@ -3,6 +3,9 @@ package app
 import (
 	"github.com/robfig/revel"
 	"github.com/russross/blackfriday"
+	// m "github.com/slogsdon/acvte/app/models"
+	// "github.com/coocood/qbs"
+	// _ "github.com/go-sql-driver/mysql"
 )
 
 func init() {
@@ -26,6 +29,12 @@ func init() {
 		output := blackfriday.MarkdownCommon([]byte(str))
 		return string(output)
 	}
+
+	// revel.OnAppStart(func () {
+	// 	if err := CreateUserTable(); err != nil {
+	// 		revel.ERROR.Fatal(err)
+	// 	}
+	// })
 }
 
 var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
@@ -36,3 +45,12 @@ var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
 
 	fc[0](c, fc[1:]) // Execute the next filter stage.
 }
+
+// func CreateUserTable() error {
+//     migration, err := qbs.GetMigration()
+//     if err != nil {
+//         return err
+//     }
+//     defer migration.Close()
+//     return migration.CreateTableIfNotExists(new(m.User))
+// }

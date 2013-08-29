@@ -4,6 +4,7 @@ import (
 	"github.com/robfig/revel"
 	"github.com/slogsdon/acvte/app/models"
 	"github.com/slogsdon/acvte/modules/db"
+	"strings"
 )
 
 type Posts struct {
@@ -21,12 +22,17 @@ func (c Posts) Category(slug string) revel.Result {
 	err := db.Db.Where("slug LIKE '"+slug+"/%'").OrderByDesc("published_at").FindAll(&posts)
 
 	// Post not found. issue 404
-	if err != nil {
+	if err != nil || len(posts) == 0 {
 		c.Response.Status = 404
 		return c.Render()
 	}
 
+	// title case the category slug
+	category := strings.Replace(slug, "-", " ", -1)
+	category = strings.Title(category)
+
 	// less magic in rendering for more magic in routing
+	c.RenderArgs["category"] = category
 	c.RenderArgs["posts"] = posts
 	return c.RenderTemplate("Posts/Category.html")
 }
