@@ -39,15 +39,20 @@ deploy:
             filename: $PRIVATEKEY_PATH
             content: $ACVTE_DEPLOY_KEY_PRIVATE
             overwrite: true
-        # - script:
-        #     name: stop application
-        #     code: ssh -i $PRIVATEKEY_PATH -l root -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no apphost.io stop acvte
+        - script:
+            name: stop application
+            code: ssh -i $PRIVATEKEY_PATH -l root -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no apphost.io stop acvte
         - script:
             name: transfer application
             code: |
                 pwd
                 ls -la
                 rsync -av -e "ssh -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no" . root@apphost.io:/var/www/vhosts/shanelogsdon.com/subdomains/acvte
+        - script:
+            name: bower install
+            code: |
+                
+                ssh -i $PRIVATEKEY_PATH -l root -o StrictHostKeyChecking=no -o UserKnownHostsFile=no apphost.io "cd /var/www/vhosts/shanelogsdon.com/subdomains/acvte/src/github.com/slogsdon/acvte && bower --allow-root install"
         - script:
             name: start application
             code: ssh -i $PRIVATEKEY_PATH -l root -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no apphost.io start acvte
