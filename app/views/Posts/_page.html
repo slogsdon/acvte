@@ -1,9 +1,11 @@
-    <article id="page-{{ .Id }}" class="full">
-        <h1>{{ .Title }}</h1>
-        <time>{{ .Date }}</time>
-        <div class="post">
-            {{ raw (markdown .Content) }}
-        </div>
-    </article>
+    {{ with .post }}
+        <article id="page-{{ .Id }}" class="full">
+            <h1>{{ .Title }}</h1>
+            <time>{{ .Date }}</time>
+            <div class="post">
+                {{ raw (markdown .Content) }}
+            </div>
+        </article>
+    {{ end }}
 
     {{ template "Posts/_signature.html" . }}

@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  <head>
-    <title>{{ if eq .title nil }}Shane Logsdon{{ else }}{{ .title }} - Shane Logsdon{{ end }}</title>
-    <meta content="Shane Logsdon" name="author">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <title>{{ if eq .title nil }}{{ .info.name }}{{ else }}{{ .title }} - {{ .info.name }}{{ end }}</title>
+        <meta content="{{ .info.name }}" name="author">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="/public/css/today.css">
-    <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png">
-    
-    {{ range .moreStyles }}
-      <link rel="stylesheet" type="text/css" href="/public/{{.}}">
-    {{ end }}
-  </head>
-  <body>
-    <div id="body">
-      <header class="clearfix">
-        <a href="/" class="icon-home" id="home-link">Home</a>
-        <div id="header-content">
-          <h1><a href="/">Shane Logsdon</a></h1>
-          <p>Developer. Tech tinkerer. Perpetual learner.</p>
-          <ul id="connect" class="clearfix">
-            <li>
-              <a href="http://twitter.com/shanelogsdon" class="icon-twitter" id="connect-twitter">@shanelogsdon</a>
-            </li>
-            <li>
-              <a href="https://github.com/slogsdon" class="icon-github" id="connect-github">github</a>
-            </li>
-            <li class="right">
-              <a href="mailto:shane@shanelogsdon.com" class="icon-envelope" id="connect-email">email</a>
-            </li>
-            <li class="right">
-              <a href="/posts.rss" class="open-external icon-rss" id="connect-rss">rss</a>
-            </li>
-          </ul>
-        </div>
-      </header>
-      <div id="content">
-        <div class="inner">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="/public/css/today.css">
+        <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png">
+        
+        {{ range .moreStyles }}
+            <link rel="stylesheet" type="text/css" href="/public/{{.}}">
+        {{ end }}
+    </head>
+    <body>
+        <div id="body">
+            <header class="clearfix">
+                <a href="/" class="icon-home" id="home-link">Home</a>
+                <div id="header-content">
+                    <h1><a href="/">{{ .info.name }}</a></h1>
+                    <p>{{ .info.tagline }}</p>
+                    <ul id="connect" class="clearfix">
+                        <li>
+                            <a href="http://twitter.com/{{ .info.twitter }}" class="icon-twitter" id="connect-twitter">@{{ .info.twitter }}</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/{{ .info.github }}" class="icon-github" id="connect-github">@{{ .info.github }}</a>
+                        </li>
+                        <li class="right">
+                            <a href="mailto:{{ .info.email }}" class="icon-envelope" id="connect-email">email</a>
+                        </li>
+                        <li class="right">
+                            <a href="/posts.rss" class="open-external icon-rss" id="connect-rss">rss</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <div id="content">
+                <div class="inner">

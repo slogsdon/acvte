@@ -26,7 +26,7 @@ html,button,input,select,textarea
 
 body
 {
-  background:#fff;
+  background:#fafafa;
   color:#151515;
   -webkit-font-smoothing:antialiased;
   word-wrap:break-word;
@@ -1194,7 +1194,7 @@ li
 
 a,a:visited a:active
 {
-  color:#bdcbd3;
+  color:#687686;
   text-decoration:none;
   -webkit-transition:all .1s linear;
   -moz-transition:all .1s linear;

@@ -1,8 +1,8 @@
 {{ if .post }}{{ set . "title" .post.Title }}{{ end }}
 {{ template "header.html" . }}
 
-{{ with .post }}
-    {{ if .Page }}
+{{ if .post }}
+    {{ if .post.Page }}
         {{ template "Posts/_page.html" . }}
     {{ else }}
         {{ template "Posts/_post.html" . }}
