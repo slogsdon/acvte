@@ -83,16 +83,16 @@ var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
 
 var TemplateInfoFilter = func(c *revel.Controller, fc []revel.Filter) {
 	var info = Info { 
-		Name:       revel.Config.StringDefault("info.name", ""),
-		Tagline:    revel.Config.StringDefault("info.tagline", ""),
-		Email:      revel.Config.StringDefault("info.email", ""),
-		Twitter:    revel.Config.StringDefault("info.twitter", ""),
-		Github:     revel.Config.StringDefault("info.github", ""),
+		Name:      revel.Config.StringDefault("info.name", ""),
+		Tagline:   revel.Config.StringDefault("info.tagline", ""),
+		Email:     revel.Config.StringDefault("info.email", ""),
+		Twitter:   revel.Config.StringDefault("info.twitter", ""),
+		Github:    revel.Config.StringDefault("info.github", ""),
 		UseGa:     revel.Config.BoolDefault("info.use_ga", false),
 		GaId:      revel.Config.StringDefault("info.ga_id", ""),
 		UseGauges: revel.Config.BoolDefault("info.use_gauges", false),
 		GaugesId:  revel.Config.StringDefault("info.gauges_id", ""),
-		Domain:     revel.Config.StringDefault("info.domain", ""),
+		Domain:    revel.Config.StringDefault("info.domain", ""),
 		UseDisqus: revel.Config.BoolDefault("info.use_disqus", false),
 		DisqusId:  revel.Config.StringDefault("info.disqus_id", ""),
 	}
