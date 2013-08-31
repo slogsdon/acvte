@@ -4211,7 +4211,7 @@ function changeCol() {
 }
 
 function filterTitle(objects, val) {
-  return objects.filter(function filterTitleObjects(el) {
+  return objects && objects.filter(function filterTitleObjects(el) {
       var regex = new RegExp(val.split('').join('.*'), 'i');
       if (el.title.match(regex)) return true;
     }).map(function filterTitleMap(el) {
