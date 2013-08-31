@@ -1,18 +1,12 @@
 {{ if .post }}{{ set . "title" .post.Title }}{{ end }}
 {{ template "header.html" . }}
 
-{{ with .post }}
-    <article id="post-8" class="full">
-        <h1>{{ .Title }}</h1>
-        <time>{{ .Date }}</time>
-        <div class="post">
-            {{ raw (markdown .Content) }}
-        </div>
-    </article>
-
-    {{ template "Posts/_signature.html" . }}
-    {{ template "Posts/_pager.html" . }}
-    {{ template "Posts/_disqus.html" . }}
+{{ if .post }}
+    {{ if .post.Page }}
+        {{ template "Posts/_page.html" . }}
+    {{ else }}
+        {{ template "Posts/_post.html" . }}
+    {{ end }}
 {{ else }}
     {{ template "errors/404.html" . }}
 {{ end }}

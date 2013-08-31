@@ -1,9 +1,9 @@
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'shanelogsdon', // required: replace example with your forum shortname
+    var disqus_shortname = '{{ .info.DisqusId }}', // required: replace example with your forum shortname
         disqus_identifier = '{{ .Slug }}',
-        disqus_url = 'http://shanelogsdon.com/{{ .Slug }}';
+        disqus_url = 'http://{{ .info.Domain }}/{{ .Slug }}';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function () {
@@ -13,10 +13,10 @@
     })();
 </script>
 <noscript>
-  Please enable JavaScript to view the
-  <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    Please enable JavaScript to view the
+    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
 </noscript>
 <a href="http://disqus.com" class="dsq-brlink">
-  comments powered by
-  <span class="logo-disqus">Disqus</span>
+    comments powered by
+    <span class="logo-disqus">Disqus</span>
 </a>
