@@ -18,7 +18,7 @@ func (c Admin) Index() revel.Result {
 		drafts    []*models.Post
 		published []*models.Post
 	)
-	db.Db.Where("draft = 1").FindAll(&drafts)
+	db.Db.Where("draft = 1").OrderBy("created_at").FindAll(&drafts)
 	db.Db.Where("draft = 0").OrderByDesc("published_at").FindAll(&published)
 	return c.Render(drafts, published)
 }
@@ -45,6 +45,13 @@ func (c Admin) Update(post *models.Post) revel.Result {
 	if c.Validation.HasErrors() {
 		c.Validation.Keep()
 		c.FlashParams()
+	}
+
+	p := new(models.Post)
+	db.Db.WhereEqual("id", post.Id).Find(p)
+
+	if !p.Equals(post) {
+		db.Db.Save(post)
 	}
 
 	return c.RenderJson(post)

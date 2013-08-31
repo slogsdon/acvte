@@ -1,0 +1,15 @@
+    {{ with .post }}
+        <article id="post-{{ .Id }}" class="full">
+            <h1>{{ .Title }}</h1>
+            <time>{{ .Date }}</time>
+            <div class="post">
+                {{ raw (markdown .Content) }}
+            </div>
+        </article>
+    {{ end }}
+
+    {{ template "Posts/_signature.html" . }}
+    {{ template "Posts/_pager.html" . }}
+    {{ if .info.UseDisqus }}
+        {{ template "Posts/_disqus.html" . }}
+    {{ end }}

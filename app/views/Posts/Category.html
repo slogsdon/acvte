@@ -1,0 +1,21 @@
+{{ template "header.html" . }}
+
+<h1>Posts in {{ .category }}</h1>
+
+{{ range .posts }}
+    <article id="post-{{ .Id }}" class="collapsed">
+        {{ if .External }}
+            <h2 class="external">
+                <a href="{{ .Url }}">{{ .Title }}</a>
+            </h2>
+        {{ else }}
+            <h2>
+                <a href="{{ .Slug }}">{{ .Title }}</a>
+            </h2>
+        {{ end }}
+        <time>{{ .Date }}</time>
+    </article>
+{{ else }}
+{{ end }}
+
+{{ template "footer.html" . }}

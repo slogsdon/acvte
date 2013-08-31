@@ -6,6 +6,7 @@
     <title>Login</title>
 </head>
 <body>
+    {{.flash.error}}
     <form action="/session/create" method="post">
         <fieldset>
             <div class="login-username">

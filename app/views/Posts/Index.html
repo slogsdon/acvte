@@ -1,26 +1,20 @@
 {{ template "header.html" . }}
 
 {{ range .posts }}
-    <article id="post-{{ .Id }}" class="collapsed">
-        {{ if .External }}
-            <h1 class="external">
-                {{ if false }} <!-- @single_post -->
+    {{ if not .Page }}
+        <article id="post-{{ .Id }}" class="collapsed">
+            {{ if .External }}
+                <h2 class="external">
                     <a href="{{ .Url }}">{{ .Title }}</a>
-                {{ else }}
-                    <a href="{{ .Url }}">{{ .Title }}</a>
-                {{ end }}
-            </h1>
-        {{ else }}
-            <h1>
-                {{ if false }} <!-- @single_post -->
-                    <a href="{{ .Url }}">{{ .Title }}</a>
-                {{ else }}
+                </h2>
+            {{ else }}
+                <h2>
                     <a href="{{ .Slug }}">{{ .Title }}</a>
-                {{ end }}
-            </h1>
-        {{ end }}
-        <time>{{ .Date }}</time>
-    </article>
+                </h2>
+            {{ end }}
+            <time>{{ .Date }}</time>
+        </article>
+    {{ end }}
 {{ end }}
 
 {{ template "footer.html" . }}
