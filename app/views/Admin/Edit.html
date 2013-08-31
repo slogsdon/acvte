@@ -11,12 +11,14 @@
 </head>
 {{ with .post }}
 <body class="admin edit">
+    <div id="post" data-state="{{ json . }}"></div>
     <a id="edit-button" href="/admin" data-target="#modal-login" class="icon-reorder" data-no-turbolink="true"></a>
     <div id="admin">
         <form accept-charset="UTF-8" action="/{{ .Id }}/edit" class="edit_post" id="edit_post_{{ .Id }}" method="post">
             <div style="margin:0;padding:0;display:inline">
                 <input name="post.Id" type="hidden" value="{{ .Id }}" />
                 <input name="post.CreatedAt" type="hidden" value="{{ .CreatedAtDateTime }}" />
+                <input name="post.UpdatedAt" type="hidden" value="{{ .UpdatedAtDateTime }}" />
                 <input name="utf8" type="hidden" value="&#x2713;" />
                 <input name="_method" type="hidden" value="put" />
                 <input name="authenticity_token" type="hidden" value="X36nu4GADWy1YsUlK5jnQtO5R2LxnsQumEr+HKIdNZc=" />

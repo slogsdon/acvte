@@ -429,6 +429,7 @@ ul.icons li [class^="icon-"],ul.icons li [class*=" icon-"]
 .icon-eye-open:before { content:"\f06e"; }
 .icon-eye-close:before { content:"\f070"; }
 .icon-arrow-left:before { content:"\f060"; }
+.icon-check:before { content:"\f046"; }
 
 .avgrund-active #body
 {
@@ -1195,6 +1196,7 @@ li
 a,a:visited a:active
 {
   color:#687686;
+  font-weight: 900;
   text-decoration:none;
   -webkit-transition:all .1s linear;
   -moz-transition:all .1s linear;
