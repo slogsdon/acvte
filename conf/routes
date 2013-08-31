@@ -6,6 +6,7 @@ module:testrunner
 module:auth
 
 GET      /                                       Posts.Index
+GET      /posts.rss                              Posts.Feed
 
 GET      /admin                                  Admin.Index
 GET      /new                                    Admin.New
