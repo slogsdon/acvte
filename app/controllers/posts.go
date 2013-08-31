@@ -15,7 +15,7 @@ type Posts struct {
 
 func (c Posts) Index() revel.Result {
 	var posts []*models.Post
-	db.Db.OrderByDesc("published_at").FindAll(&posts)
+	db.Db.Where("draft = 0 and page = 0").OrderByDesc("published_at").FindAll(&posts)
 	return c.Render(posts)
 }
 
@@ -41,7 +41,7 @@ func (c Posts) Category(slug string) revel.Result {
 
 func (c Posts) Feed() revel.Result {
 	var posts []*models.Post
-	db.Db.OrderByDesc("published_at").Limit(10).FindAll(&posts)
+	db.Db.Where("draft = 0 and page = 0").OrderByDesc("published_at").Limit(10).FindAll(&posts)
 
 	rss := new(Rss)
 	rss.Version = "2.0"
