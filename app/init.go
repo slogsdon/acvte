@@ -1,6 +1,7 @@
 package app
 
 import (
+	"encoding/json"
 	"github.com/robfig/revel"
 	"github.com/russross/blackfriday"
 	// m "github.com/slogsdon/acvte/app/models"
@@ -49,6 +50,20 @@ func init() {
 		output := blackfriday.Markdown(input, renderer, extensions)
 		return string(output)
 	}
+	revel.TemplateFuncs["json"] = func(i interface{}) string {
+		if i == nil {
+			return ""
+		}
+		b, err := json.Marshal(i)
+		if err != nil {
+			return ""
+		}
+		s := string(b)
+		if s == "null" {
+			return ""
+		} 
+		return s
+	}
 
 	// revel.OnAppStart(func () {
 	// 	if err := CreateUserTable(); err != nil {
@@ -67,22 +82,38 @@ var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
 }
 
 var TemplateInfoFilter = func(c *revel.Controller, fc []revel.Filter) {
-	c.RenderArgs["info"] = map[string]string {
-		"name":       revel.Config.StringDefault("info.name", ""),
-		"tagline":    revel.Config.StringDefault("info.tagline", ""),
-		"email":      revel.Config.StringDefault("info.email", ""),
-		"twitter":    revel.Config.StringDefault("info.twitter", ""),
-		"github":     revel.Config.StringDefault("info.github", ""),
-		"use_ga":     revel.Config.StringDefault("info.use_ga", "false"),
-		"ga_id":      revel.Config.StringDefault("info.ga_id", ""),
-		"use_gauges": revel.Config.StringDefault("info.use_gauges", "false"),
-		"gauges_id":  revel.Config.StringDefault("info.gauges_id", ""),
-		"domain":     revel.Config.StringDefault("info.domain", ""),
-		"use_disqus": revel.Config.StringDefault("info.use_disqus", "false"),
-		"disqus_id":  revel.Config.StringDefault("info.disqus_id", ""),
+	var info = Info { 
+		Name:       revel.Config.StringDefault("info.name", ""),
+		Tagline:    revel.Config.StringDefault("info.tagline", ""),
+		Email:      revel.Config.StringDefault("info.email", ""),
+		Twitter:    revel.Config.StringDefault("info.twitter", ""),
+		Github:     revel.Config.StringDefault("info.github", ""),
+		UseGa:     revel.Config.BoolDefault("info.use_ga", false),
+		GaId:      revel.Config.StringDefault("info.ga_id", ""),
+		UseGauges: revel.Config.BoolDefault("info.use_gauges", false),
+		GaugesId:  revel.Config.StringDefault("info.gauges_id", ""),
+		Domain:     revel.Config.StringDefault("info.domain", ""),
+		UseDisqus: revel.Config.BoolDefault("info.use_disqus", false),
+		DisqusId:  revel.Config.StringDefault("info.disqus_id", ""),
 	}
+	c.RenderArgs["info"] = info
 
 	fc[0](c, fc[1:])
+}
+
+type Info struct {
+	Name      string
+	Tagline   string
+	Email     string
+	Twitter   string
+	Github    string
+	UseGa     bool
+	GaId      string
+	UseGauges bool
+	GaugesId  string
+	Domain    string
+	UseDisqus bool
+	DisqusId  string
 }
 
 // func CreateUserTable() error {

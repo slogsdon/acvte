@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>{{ if eq .title nil }}{{ .info.name }}{{ else }}{{ .title }} - {{ .info.name }}{{ end }}</title>
-        <meta content="{{ .info.name }}" name="author">
+        <title>{{ if eq .title nil }}{{ .info.Name }}{{ else }}{{ .title }} - {{ .info.Name }}{{ end }}</title>
+        <meta content="{{ .info.Name }}" name="author">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -19,17 +19,17 @@
             <header class="clearfix">
                 <a href="/" class="icon-home" id="home-link">Home</a>
                 <div id="header-content">
-                    <h1><a href="/">{{ .info.name }}</a></h1>
-                    <p>{{ .info.tagline }}</p>
+                    <h1><a href="/">{{ .info.Name }}</a></h1>
+                    <p>{{ .info.Tagline }}</p>
                     <ul id="connect" class="clearfix">
                         <li>
-                            <a href="http://twitter.com/{{ .info.twitter }}" class="icon-twitter" id="connect-twitter">@{{ .info.twitter }}</a>
+                            <a href="http://twitter.com/{{ .info.Twitter }}" class="icon-twitter" id="connect-twitter">@{{ .info.Twitter }}</a>
                         </li>
                         <li>
-                            <a href="https://github.com/{{ .info.github }}" class="icon-github" id="connect-github">@{{ .info.github }}</a>
+                            <a href="https://github.com/{{ .info.Github }}" class="icon-github" id="connect-github">@{{ .info.Github }}</a>
                         </li>
                         <li class="right">
-                            <a href="mailto:{{ .info.email }}" class="icon-envelope" id="connect-email">email</a>
+                            <a href="mailto:{{ .info.Email }}" class="icon-envelope" id="connect-email">email</a>
                         </li>
                         <li class="right">
                             <a href="/posts.rss" class="open-external icon-rss" id="connect-rss">rss</a>

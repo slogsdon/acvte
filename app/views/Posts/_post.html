@@ -10,6 +10,6 @@
 
     {{ template "Posts/_signature.html" . }}
     {{ template "Posts/_pager.html" . }}
-    {{ if eq .info.use_disqus "true" }}
+    {{ if .info.UseDisqus }}
         {{ template "Posts/_disqus.html" . }}
     {{ end }}

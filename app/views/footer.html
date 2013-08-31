@@ -7,10 +7,10 @@
         {{ range .moreScripts }}
             <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
         {{ end }}
-        {{ if eq .info.use_ga "true" }}
+        {{ if .info.UseGa }}
             {{ template "common/_ga.html" . }}
         {{ end }}
-        {{ if eq .info.use_gauges "true" }}
+        {{ if .info.UseGauges }}
             {{ template "common/_gauges.html" . }}
         {{ end }}
         
