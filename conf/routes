@@ -12,6 +12,7 @@ GET      /admin                                  Admin.Index
 GET      /new                                    Admin.New
 GET      /:id/edit                               Admin.Edit
 POST,PUT /:id/edit                               Admin.Update
+POST     /webhook/draftin/:secret                Admin.DraftIn
 
 # Ignore favicon requests
 GET      /favicon.ico                            404

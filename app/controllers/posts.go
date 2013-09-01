@@ -145,6 +145,7 @@ func (c Posts) PrevPost(p *models.Post) *models.Post {
 		extensions |= blackfriday.EXTENSION_AUTOLINK
 		extensions |= blackfriday.EXTENSION_STRIKETHROUGH
 		extensions |= blackfriday.EXTENSION_SPACE_HEADERS
+		extensions |= blackfriday.EXTENSION_FOOTNOTES
 
 		output := blackfriday.Markdown(input, renderer, extensions)
 		return string(output)
