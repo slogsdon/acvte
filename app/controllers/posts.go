@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"encoding/xml"
 	"github.com/robfig/revel"
+	"github.com/russross/blackfriday"
 	"github.com/slogsdon/acvte/app/models"
 	"github.com/slogsdon/acvte/modules/db"
 	"strings"
@@ -13,7 +15,7 @@ type Posts struct {
 
 func (c Posts) Index() revel.Result {
 	var posts []*models.Post
-	db.Db.OrderByDesc("published_at").FindAll(&posts)
+	db.Db.Where("draft = 0 and page = 0").OrderByDesc("published_at").FindAll(&posts)
 	return c.Render(posts)
 }
 
@@ -35,6 +37,34 @@ func (c Posts) Category(slug string) revel.Result {
 	c.RenderArgs["category"] = category
 	c.RenderArgs["posts"] = posts
 	return c.RenderTemplate("Posts/Category.html")
+}
+
+func (c Posts) Feed() revel.Result {
+	var posts []*models.Post
+	db.Db.Where("draft = 0 and page = 0").OrderByDesc("published_at").Limit(10).FindAll(&posts)
+
+	rss := new(Rss)
+	rss.Version = "2.0"
+
+	rss.Channel = new(Channel)
+	rss.Channel.Title = "test title"
+	rss.Channel.Link = "/"
+
+	//rss.Channel.Item = new([]*Item)
+
+	count := len(posts)
+	for i := 0; i < count; i++ {
+		rss.Channel.Item = append(rss.Channel.Item, &Item{
+			Title:       posts[i].Title,
+			Description: markdown(posts[i].Content),
+			PubDate:     posts[i].PublishedAtDateTime(),
+			Link:        "http://"+c.Request.Host+"/"+posts[i].Slug,
+			Guid:        "http://"+c.Request.Host+"/"+posts[i].Slug,
+		})
+	}
+
+	c.Response.Out.Write([]byte(xml.Header))
+	return c.RenderXml(rss)
 }
 
 func (c Posts) Show(slug string) revel.Result {
@@ -94,4 +124,52 @@ func (c Posts) PrevPost(p *models.Post) *models.Post {
 	post := new(models.Post)
 	db.Db.WhereEqual("id", id).Find(post)
 	return post
+}
+
+ func markdown(str string) string {
+		// this did use blackfriday.MarkdownCommon, but it was stripping out <script>
+		input := []byte(str)
+
+		htmlFlags := 0
+		htmlFlags |= blackfriday.HTML_USE_XHTML
+		htmlFlags |= blackfriday.HTML_USE_SMARTYPANTS
+		htmlFlags |= blackfriday.HTML_SMARTYPANTS_FRACTIONS
+		htmlFlags |= blackfriday.HTML_SMARTYPANTS_LATEX_DASHES
+		renderer := blackfriday.HtmlRenderer(htmlFlags, "", "")
+
+		// set up the parser
+		extensions := 0
+		extensions |= blackfriday.EXTENSION_NO_INTRA_EMPHASIS
+		extensions |= blackfriday.EXTENSION_TABLES
+		extensions |= blackfriday.EXTENSION_FENCED_CODE
+		extensions |= blackfriday.EXTENSION_AUTOLINK
+		extensions |= blackfriday.EXTENSION_STRIKETHROUGH
+		extensions |= blackfriday.EXTENSION_SPACE_HEADERS
+		extensions |= blackfriday.EXTENSION_FOOTNOTES
+
+		output := blackfriday.Markdown(input, renderer, extensions)
+		return string(output)
+	}
+
+type Rss struct {
+	XMLName  xml.Name `xml:"rss"`
+	Version  string   `xml:"version,attr"`
+	*Channel  
+}
+
+type Channel struct {
+	XMLName     xml.Name `xml:"channel"`
+	Title       string   `xml:"title"`
+	Description string   `xml:"description"`
+	Link        string   `xml:"link"`
+	Item        []*Item
+}
+
+type Item struct {
+	XMLName     xml.Name `xml:"item"`
+	Title       string   `xml:"title"`
+	Description string   `xml:"description"`
+	PubDate     string   `xml:"pubDate"`
+	Link        string   `xml:"link"`
+	Guid        string   `xml:"guid"`
 }
